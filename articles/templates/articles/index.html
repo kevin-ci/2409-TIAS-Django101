@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Articles</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+    {% if request.user.is_superuser %}
+        <a href="{% url 'create_article' %}">Create a new article</a>
+    {% endif %}
     {% for article in articles %}
         <h2>{{ article.headline }}</h2>
         <p>{{ article.copy|truncatechars:100 }}</p>
         <a href="{% url 'view_article' article.id %}">Read more</a>
+        {% if request.user.is_superuser %}
+            <a href="{% url 'edit_article' article.id %}">Edit</a>
+            <a href="{% url 'delete_article' article.id %}">Delete</a>
+        {% endif %}
     {% endfor %}
-</body>
-</html>
+{% endblock content %}
