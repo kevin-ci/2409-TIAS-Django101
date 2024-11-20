@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>Your Bookings</h3>
+    {% for booking in slots.all %}
+        <h2>Date: {{ booking.date }}</h2>
+        <h3>Time: {{ booking.time }}</h3>
+        <form method="POST" action="{% url 'cancel_slot' booking.id %}">
+            {% csrf_token %}
+            <button type="submit">Cancel</button>
+        </form>
+    {% endfor %}
+{% endblock content %}

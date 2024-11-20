@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url 'add_booking' %}">Create a new booking</a>
+    <h3>Your Bookings</h3>
+    {% for booking in bookings %}
+        <h2>Date: {{ booking.date }}</h2>
+        <h3>Time: {{ booking.time }}</h3>
+        <a href="{% url 'edit_booking' booking.id %}">Edit</a>
+        <a href="{% url 'delete_booking' booking.id %}">Delete</a>
+    {% endfor %}
+{% endblock content %}

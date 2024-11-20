@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Book a slot:</h1>
+
+{% for slot in slots %}
+
+    <p>Date: {{ slot.date }}</p>
+    <p>Time: {{ slot.time }}</p>
+    <form method="POST" action="{% url 'book_slot' slot.id %}">
+        {% csrf_token %}
+        <button type="submit">Book</button>
+    </form>
+
+{% endfor %}
+{% endblock content %}
